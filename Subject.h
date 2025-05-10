@@ -19,5 +19,7 @@ public:
     int getTotalTime();
     string getName();
     void setName(string name);
+    void saveToFile(const std::string &filename) const;
+    void loadFromFile(const std::string &filename);
 };
 #endif

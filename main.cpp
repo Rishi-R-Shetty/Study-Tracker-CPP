@@ -1,64 +1,29 @@
 #include <iostream>
 #include "Subject.h"
 #include "StudySession.h"
-using namespace std;
 
 int main()
 {
-    Subject subject("Maths");
-    int choice;
+    Subject subject("DSA");
 
-    while (true)
-    {
-        cout << "\n Study Tracker Menu\n";
-        cout << "1. Add Session\n";
-        cout << "2. Show all sessions\n";
-        cout << "3. Get total study time\n";
-        cout << "4. Exit\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
+    // Add test sessions
+    subject.addSession(StudySession("Trees", "2025-05-10", 90, "AVL and Red-Black"));
+    subject.addSession(StudySession("Graphs", "2025-05-11", 60, "DFS/BFS"));
 
-        cin.ignore();
+    std::cout << "\n🔽 Display before saving:\n";
+    subject.showAllSessions();
 
-        switch (choice)
-        {
-        case 1:
-        {
-            string topic, date, notes;
-            int duration;
-            cout << "Enter topic: ";
-            getline(cin, topic);
+    // Save to file
+    subject.saveToFile("sessions.txt");
 
-            cout << "Enter Date (YYYY-MM-DD): ";
-            getline(cin, date);
+    // Create new subject to simulate fresh start
+    Subject loaded("DSA");
 
-            cout << "Enter duration (minutes)";
-            cin >> duration;
-            cin.ignore();
+    // Load from file
+    loaded.loadFromFile("sessions.txt");
 
-            cout << "Enter notes: ";
-            getline(cin, notes);
+    std::cout << "\n📁 Display after loading:\n";
+    loaded.showAllSessions();
 
-            StudySession session(topic, date, duration, notes);
-            subject.addSession(session);
-            cout << "✅ Session added!\n";
-            break;
-        }
-        case 2:
-            subject.showAllSessions();
-            break;
-
-        case 3:
-            cout << "Total Time" << subject.getTotalTime() << "minutes\n";
-            break;
-
-        case 4:
-            cout << "BYEEEE QTU\n";
-            return 0;
-
-        default:
-            cout << "BRUH!!!";
-        }
-    }
     return 0;
 }

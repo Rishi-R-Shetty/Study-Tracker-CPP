@@ -25,6 +25,7 @@ public:
     void setNotes(string notes);
 
     void displaySession() const;
+    void saveToFile(const std::string &filename) const;
 };
 
 #endif
